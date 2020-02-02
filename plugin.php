@@ -3,11 +3,11 @@
  * Plugin Name: Strip Lightbox
  * Plugin URI: http://github.com/chrismccoy/strip
  * Description: Use this plugin to implement the strip lightbox
- * Version: 1.0
+ * Version: 2.0
  * Author: Chris McCoy
  * Author URI: http://github.com/chrismccoy
 
- * @copyright 2017
+ * @copyright 2020
  * @author Chris McCoy
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
@@ -157,7 +157,8 @@ if( !class_exists( 'Strip_Lightbox' ) ) {
 		 */
 
 		function scripts() {
-			wp_enqueue_script('strip_js', plugins_url('js/strip.min.js', __FILE__), array( 'jquery' ), '1.0', true);
+			//wp_enqueue_script('strip_js', plugins_url('js/strip.min.js', __FILE__), array( 'jquery' ), '1.0', true);
+			wp_enqueue_script('strip_js', 'https://cdn.jsdelivr.net/gh/staaky/strip/dist/js/strip.pkgd.min.js', array( 'jquery' ), '1.0', true);
         	}
 
 		/**
@@ -167,8 +168,8 @@ if( !class_exists( 'Strip_Lightbox' ) ) {
 		 */
 
 		function styles() {
-			wp_enqueue_style( 'strip_css', plugins_url( 'css/strip.css', __FILE__ ), false, '1.0', 'screen' );
-
+			//wp_enqueue_style( 'strip_css', plugins_url( 'css/strip.css', __FILE__ ), false, '1.0', 'screen' );
+			wp_enqueue_style( 'strip_css', 'https://cdn.jsdelivr.net/gh/staaky/strip/dist/css/strip.css', false, '1.0', 'screen' );
 
 			if ( @file_exists( get_stylesheet_directory() . '/strip_custom.css' ) )
 				$css_file = get_stylesheet_directory_uri() . '/strip_custom.css';

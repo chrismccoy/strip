@@ -3,7 +3,7 @@
  * Plugin Name: Strip Lightbox
  * Plugin URI: http://github.com/chrismccoy/strip
  * Description: Use this plugin to implement the strip lightbox
- * Version: 2.0
+ * Version: 3.0
  * Author: Chris McCoy
  * Author URI: http://github.com/chrismccoy
 
@@ -60,6 +60,7 @@ if( !class_exists( 'Strip_Lightbox' ) ) {
 			add_action( 'admin_init', array( $this, 'strip_settings_init' ));
 			add_filter( 'oembed_dataparse', array($this, 'oembed_services'), 10, 3);
 			add_action( 'init', array( $this, 'embeds' ));
+			add_action( 'init', array( $this, 'block' ));
 		}
 
 		/**
@@ -177,6 +178,22 @@ if( !class_exists( 'Strip_Lightbox' ) ) {
 				$css_file = plugins_url( 'css/custom.css', __FILE__ );
 
 			wp_enqueue_style( 'strip_custom_css', $css_file, false, '1.0', 'screen' );
+		}
+
+		/**
+		 * convert block gallery into strip gallery shortcode
+		 *
+		 * @since 1.0
+		 */
+
+		function block() {
+			if(function_exists('parse_blocks') ) {
+       				register_block_type( 'core/gallery', array(
+               				'render_callback' => function($attributes, $content) {
+                       				return '[gallery ids="' . implode( ',', $attributes['ids'] ) . '"]';
+               				})
+       				);
+			}
 		}
 
 		/**
